@@ -1,3 +1,4 @@
 {
-  "name": "Smart Travel Finance"
+  "name": "Smart Travel Finance",
+  "short_name": "STF Tools"
 }
