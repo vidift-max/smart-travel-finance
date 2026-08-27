@@ -16,7 +16,7 @@
 "type": "image/png",
 "purpose": "any"
 },
-{"src":"https://www.smarttravelfinance.com/icons/icon-192-maskable.png",
+{:"https://www.smarttravelfinance.com/icons/icon-192-maskable.png",
 "sizes": "192x192",
 "type": "image/png",
 "purpose": "maskable"
