@@ -6,36 +6,337 @@
 
   <title>Smart Travel Finance</title>
 
-  <meta name="description" content="Financial calculators, loan tools, and smarter travel finance resources.">
+  <meta name="description" content="Smart financial tools, loan calculators and practical strategies for better travel and money decisions.">
 
   <meta name="theme-color" content="#07111f">
 
+  <!-- PWA -->
   <link rel="manifest" href="./manifest.json">
 
+  <!-- Icons -->
   <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
-
   <link rel="apple-touch-icon" href="./icons/icon-192.png">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #07111f;
+      color: #ffffff;
+      font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 22px;
+    }
+
+    header {
+      border-bottom: 1px solid #18324d;
+      background: #07111f;
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+    }
+
+    .brand span {
+      color: #38bdf8;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 90px 20px 80px;
+    }
+
+    .hero h1 {
+      max-width: 850px;
+      margin: 0 auto 24px;
+      font-size: clamp(38px, 6vw, 68px);
+      line-height: 1.08;
+      letter-spacing: -2px;
+      font-weight: 800;
+    }
+
+    .hero h1 span {
+      color: #38bdf8;
+    }
+
+    .hero p {
+      max-width: 760px;
+      margin: 0 auto;
+      color: #b8c5d6;
+      font-size: 20px;
+      line-height: 1.7;
+    }
+
+    .tools {
+      padding: 20px 0 90px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 38px;
+    }
+
+    .section-title h2 {
+      margin: 0 0 12px;
+      font-size: 32px;
+      font-weight: 800;
+    }
+
+    .section-title p {
+      margin: 0;
+      color: #9fb0c4;
+      font-size: 17px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      padding: 30px;
+      background: #0b1a2b;
+      border: 1px solid #18324d;
+      border-radius: 16px;
+      transition: transform .2s ease, border-color .2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: #28638d;
+    }
+
+    .icon {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      background: #102c45;
+      color: #38bdf8;
+      font-size: 23px;
+    }
+
+    .card h3 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .card p {
+      margin: 0;
+      color: #aebdce;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .about {
+      padding: 80px 0;
+      border-top: 1px solid #18324d;
+      background: #091725;
+    }
+
+    .about-content {
+      max-width: 800px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .about h2 {
+      font-size: 32px;
+      margin: 0 0 18px;
+    }
+
+    .about p {
+      margin: 0;
+      color: #aebdce;
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    footer {
+      padding: 30px 20px;
+      text-align: center;
+      color: #718399;
+      font-size: 14px;
+      border-top: 1px solid #18324d;
+    }
+
+    @media (max-width: 800px) {
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding: 65px 15px;
+      }
+
+      .hero p {
+        font-size: 18px;
+      }
+
+      .nav {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 39px;
+        letter-spacing: -1px;
+      }
+
+      .section-title h2,
+      .about h2 {
+        font-size: 27px;
+      }
+
+      .card {
+        padding: 25px;
+      }
+    }
+  </style>
 </head>
 
-<body style="background:#07111f;color:white;font-family:Arial,sans-serif;text-align:center;padding:60px 20px;">
+<body>
 
-  <h1>Smart Travel Finance</h1>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        Smart <span>Travel Finance</span>
+      </div>
+    </div>
+  </header>
 
-  <p>Financial calculators, loan tools, and smarter travel finance resources.</p>
+  <main>
+
+    <section class="hero">
+      <h1>
+        Make Smarter <span>Financial Decisions</span>
+      </h1>
+
+      <p>
+        Financial calculators, loan tools, and practical strategies
+        to help you make better decisions about travel and money.
+      </p>
+    </section>
+
+    <section class="tools">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Financial Tools & Resources</h2>
+          <p>Practical resources designed to simplify important money decisions.</p>
+        </div>
+
+        <div class="cards">
+
+          <div class="card">
+            <div class="icon">▣</div>
+            <h3>Financial Calculators</h3>
+            <p>
+              Estimate payments, costs, savings, and other important
+              financial numbers with practical calculators.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="icon">$</div>
+            <h3>Loan Resources</h3>
+            <p>
+              Explore loan concepts, financing options, interest rates,
+              payments, and strategies for borrowing responsibly.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="icon">✈</div>
+            <h3>Travel Finance</h3>
+            <p>
+              Learn how to plan travel expenses, manage financing,
+              and make smarter decisions before your next trip.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section class="about">
+      <div class="container">
+        <div class="about-content">
+
+          <h2>Smart Travel Finance</h2>
+
+          <p>
+            Our goal is to provide clear financial tools and useful
+            information that help travelers and consumers understand
+            their options and make more informed financial decisions.
+          </p>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    © 2026 Smart Travel Finance. All rights reserved.
+  </footer>
 
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function () {
         navigator.serviceWorker.register('./service-worker.js')
           .then(function (registration) {
-            console.log('Service Worker registered:', registration.scope);
+            console.log(
+              'Service Worker registered:',
+              registration.scope
+            );
           })
           .catch(function (error) {
-            console.error('Service Worker registration failed:', error);
+            console.error(
+              'Service Worker registration failed:',
+              error
+            );
           });
       });
     }
   </script>
 
 </body>
-</html>
+  </html>
