@@ -6,10 +6,15 @@
 
   <title>Smart Travel Finance</title>
 
-  <meta name="description" content="Financial calculators, loan tools, and travel finance resources.">
+  <meta name="description" content="Financial calculators, loan tools, and smarter travel finance resources.">
 
-  <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#07111f">
+
+  <link rel="manifest" href="./manifest.json">
+
+  <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
+
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
 </head>
 
 <body style="background:#07111f;color:white;font-family:Arial,sans-serif;text-align:center;padding:60px 20px;">
@@ -17,6 +22,20 @@
   <h1>Smart Travel Finance</h1>
 
   <p>Financial calculators, loan tools, and smarter travel finance resources.</p>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('./service-worker.js')
+          .then(function (registration) {
+            console.log('Service Worker registered:', registration.scope);
+          })
+          .catch(function (error) {
+            console.error('Service Worker registration failed:', error);
+          });
+      });
+    }
+  </script>
 
 </body>
 </html>
