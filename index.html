@@ -17,326 +17,975 @@
   <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
   <link rel="apple-touch-icon" href="./icons/icon-192.png">
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
 
-    html {
-      scroll-behavior: smooth;
-    }
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: #07111f;
-      color: #ffffff;
-      font-family:
-        Inter,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Arial,
-        sans-serif;
-    }
+body{
+background:#07111f;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+color:#eef3fb;
+overflow-x:hidden;
+font-size:16px;
+}
 
-    .container {
-      width: 100%;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 22px;
-    }
+:root{
+--bg:#07111f;
+--bg2:#0c1728;
+--bg3:#132238;
+--card:#101d31;
+--card2:#16263d;
+--blue:#2d8cff;
+--blue2:#64b5ff;
+--green:#20d489;
+--orange:#ffb648;
+--red:#ff5c75;
+--text:#f5f8ff;
+--muted:#a8bdd6;
+--radius:24px;
+}
 
-    header {
-      border-bottom: 1px solid #18324d;
-      background: #07111f;
-    }
+.page{max-width:1450px;margin:auto;padding:32px;}
+section{margin:70px 0;}
 
-    .nav {
-      min-height: 76px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
+h1{font-size:60px;line-height:1.15;font-weight:800;letter-spacing:-2px;}
+h2{font-size:42px;font-weight:800;letter-spacing:-1px;margin-bottom:20px;}
+h3{font-size:27px;font-weight:700;margin-bottom:14px;}
+p{font-size:20px;line-height:1.85;color:var(--muted);}
 
-    .brand {
-      font-size: 20px;
-      font-weight: 800;
-      letter-spacing: -0.4px;
-    }
+a{text-decoration:none;color:inherit;}
 
-    .brand span {
-      color: #38bdf8;
-    }
+.btn{
+display:inline-flex;align-items:center;justify-content:center;
+padding:18px 34px;border-radius:60px;font-weight:700;font-size:17px;
+transition:.35s;cursor:pointer;
+}
 
-    .hero {
-      text-align: center;
-      padding: 90px 20px 80px;
-    }
+.btn-primary{
+background:linear-gradient(135deg,#2d8cff,#64b5ff);
+color:#fff;box-shadow:0 20px 45px rgba(45,140,255,.35);
+}
+.btn-primary:hover{transform:translateY(-5px);box-shadow:0 30px 70px rgba(45,140,255,.45);}
 
-    .hero h1 {
-      max-width: 850px;
-      margin: 0 auto 24px;
-      font-size: clamp(38px, 6vw, 68px);
-      line-height: 1.08;
-      letter-spacing: -2px;
-      font-weight: 800;
-    }
+.btn-dark{background:#17263c;color:#fff;border:1px solid rgba(255,255,255,.08);}
+.btn-dark:hover{background:#20314b;}
 
-    .hero h1 span {
-      color: #38bdf8;
-    }
+.card{
+background:linear-gradient(180deg,#132238,#0f1b2e);
+border:1px solid rgba(255,255,255,.06);
+border-radius:28px;padding:28px;transition:.35s;
+box-shadow:0 15px 45px rgba(0,0,0,.28);
+}
+.card:hover{transform:translateY(-8px);box-shadow:0 35px 70px rgba(0,0,0,.45);}
 
-    .hero p {
-      max-width: 760px;
-      margin: 0 auto;
-      color: #b8c5d6;
-      font-size: 20px;
-      line-height: 1.7;
-    }
+.glass{
+background:rgba(255,255,255,.05);backdrop-filter:blur(20px);
+border:1px solid rgba(255,255,255,.08);border-radius:24px;
+}
 
-    .tools {
-      padding: 20px 0 90px;
-    }
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:34px;}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
 
-    .section-title {
-      text-align: center;
-      margin-bottom: 38px;
-    }
+.badge{
+display:inline-flex;align-items:center;padding:11px 20px;
+border-radius:40px;background:rgba(45,140,255,.12);
+color:#8cc8ff;font-size:15px;font-weight:700;letter-spacing:1px;
+text-transform:uppercase;
+}
 
-    .section-title h2 {
-      margin: 0 0 12px;
-      font-size: 32px;
-      font-weight: 800;
-    }
+.data-asof{color:#7d92ac;font-size:13px;margin-top:10px;display:block;}
 
-    .section-title p {
-      margin: 0;
-      color: #9fb0c4;
-      font-size: 17px;
-    }
+.nav-link{font-size:17px;font-weight:600;color:#dbe7f5;}
 
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-    }
+.fade{animation:fade .8s ease;}
+@keyframes fade{from{opacity:0;transform:translateY(25px);}to{opacity:1;transform:none;}}
 
-    .card {
-      padding: 30px;
-      background: #0b1a2b;
-      border: 1px solid #18324d;
-      border-radius: 16px;
-      transition: transform .2s ease, border-color .2s ease;
-    }
+.float{animation:float 5s ease-in-out infinite;}
+@keyframes float{0%{transform:translateY(0);}50%{transform:translateY(-12px);}100%{transform:translateY(0);}}
 
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: #28638d;
-    }
+@media(max-width:1100px){
+.grid-2,.grid-3,.grid-4{grid-template-columns:1fr;}
+h1{font-size:38px;}
+h2{font-size:32px;}
+.page{padding:18px;}
+}
 
-    .icon {
-      width: 48px;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 20px;
-      border-radius: 12px;
-      background: #102c45;
-      color: #38bdf8;
-      font-size: 23px;
-    }
+@media(max-width:700px){
+p{font-size:18px!important;}
+}
 
-    .card h3 {
-      margin: 0 0 12px;
-      font-size: 20px;
-      font-weight: 700;
-    }
-
-    .card p {
-      margin: 0;
-      color: #aebdce;
-      font-size: 15px;
-      line-height: 1.7;
-    }
-
-    .about {
-      padding: 80px 0;
-      border-top: 1px solid #18324d;
-      background: #091725;
-    }
-
-    .about-content {
-      max-width: 800px;
-      margin: auto;
-      text-align: center;
-    }
-
-    .about h2 {
-      font-size: 32px;
-      margin: 0 0 18px;
-    }
-
-    .about p {
-      margin: 0;
-      color: #aebdce;
-      font-size: 17px;
-      line-height: 1.8;
-    }
-
-    footer {
-      padding: 30px 20px;
-      text-align: center;
-      color: #718399;
-      font-size: 14px;
-      border-top: 1px solid #18324d;
-    }
-
-    @media (max-width: 800px) {
-      .cards {
-        grid-template-columns: 1fr;
-      }
-
-      .hero {
-        padding: 65px 15px;
-      }
-
-      .hero p {
-        font-size: 18px;
-      }
-
-      .nav {
-        justify-content: center;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .hero h1 {
-        font-size: 39px;
-        letter-spacing: -1px;
-      }
-
-      .section-title h2,
-      .about h2 {
-        font-size: 27px;
-      }
-
-      .card {
-        padding: 25px;
-      }
-    }
-  </style>
-</head>
-
+</style>
+  </head>
 <body>
+<div class="page">
 
-  <header>
-    <div class="container nav">
-      <div class="brand">
-        Smart <span>Travel Finance</span>
-      </div>
-    </div>
-  </header>
+<!--=======================================================
+PARTE 2/10
+HEADER + HERO
+=======================================================-->
 
-  <main>
+<header style="margin-bottom: 45px;">
 
-    <section class="hero">
-      <h1>
-        Make Smarter <span>Financial Decisions</span>
-      </h1>
+<div class="glass" style="align-items: center; display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; padding: 18px 28px;">
 
-      <p>
-        Financial calculators, loan tools, and practical strategies
-        to help you make better decisions about travel and money.
-      </p>
-    </section>
+<div style="align-items: center; display: flex; gap: 14px;">
 
-    <section class="tools">
-      <div class="container">
+<div style="align-items: center; background: linear-gradient(135deg, rgb(45, 140, 255), rgb(103, 184, 255)); border-radius: 16px; color: white; display: flex; font-size: 24px; font-weight: 800; height: 54px; justify-content: center; width: 54px;">
+$
+</div>
 
-        <div class="section-title">
-          <h2>Financial Tools & Resources</h2>
-          <p>Practical resources designed to simplify important money decisions.</p>
-        </div>
+<div>
+<div style="color: white; font-size: 23px; font-weight: 800;">Smart Travel Finance</div>
+<div style="color: #1683FF; font-size: 15px;">Financial Platform</div>
+</div>
 
-        <div class="cards">
+</div>
 
-          <div class="card">
-            <div class="icon">▣</div>
-            <h3>Financial Calculators</h3>
-            <p>
-              Estimate payments, costs, savings, and other important
-              financial numbers with practical calculators.
-            </p>
-          </div>
+<nav style="align-items: center; display: flex; flex-wrap: wrap; gap: 22px;">
+<a class="nav-link" href="https://www.smarttravelfinance.com/">Home</a>
+<a class="nav-link" href="#market">Markets</a>
+<a class="nav-link" href="https://www.smarttravelfinance.com/p/auto-loan-payment-calculator-estimate.html">Loans</a>
+<a class="nav-link" href="https://www.smarttravelfinance.com/2026/07/free-credit-score-estimator-check-your.html">Credit</a>
+<a class="nav-link" href="https://www.smarttravelfinance.com/p/cheap-flights-finder-find-lowest.html">Flights</a>
+<a class="nav-link" href="https://www.smarttravelfinance.com/p/california-financial-simulator-loan.html">Tools</a>
+<a class="btn btn-primary" href="https://www.smarttravelfinance.com/p/california-financial-simulator-loan.html">Launch Simulator</a>
+</nav>
 
-          <div class="card">
-            <div class="icon">$</div>
-            <h3>Loan Resources</h3>
-            <p>
-              Explore loan concepts, financing options, interest rates,
-              payments, and strategies for borrowing responsibly.
-            </p>
-          </div>
+</div>
+</header>
 
-          <div class="card">
-            <div class="icon">✈</div>
-            <h3>Travel Finance</h3>
-            <p>
-              Learn how to plan travel expenses, manage financing,
-              and make smarter decisions before your next trip.
-            </p>
-          </div>
+<section class="grid-2 fade" style="align-items: center;">
 
-        </div>
+<div>
 
-      </div>
-    </section>
+<div class="badge" style="color: #1683FF;">FINANCIAL TOOLS &amp; MARKET DATA</div>
 
-    <section class="about">
-      <div class="container">
-        <div class="about-content">
+<h1 style="margin: 28px 0px 24px;">Financial Tools Built For Smarter Decisions.</h1>
 
-          <h2>Smart Travel Finance</h2>
+<div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhUqOpiVskyintLN1SZ_Q_yJL8nsEkdi37YJ0xrnrThtUNCV4gtRUH2w-Q4A0mpyRxndUfflYnI9PpFsu6oZUaAuhsx4S5bXEnAtagBdHV3CPx6Yw7TgYXtGZfiC_LAncMXce0LTI7uD7oObQaHueCPg-ZGE74Eg2vKQ4QL1LvqnQ-_aojdd6kiY-BPZl50/s1717/file_000000009900820eb9e6eb571e418355.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img alt="Smart Travel Finance homepage hero banner with financial tools, market dashboard, loan analysis and investment insights" border="0" data-original-height="916" data-original-width="1717" height="342" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhUqOpiVskyintLN1SZ_Q_yJL8nsEkdi37YJ0xrnrThtUNCV4gtRUH2w-Q4A0mpyRxndUfflYnI9PpFsu6oZUaAuhsx4S5bXEnAtagBdHV3CPx6Yw7TgYXtGZfiC_LAncMXce0LTI7uD7oObQaHueCPg-ZGE74Eg2vKQ4QL1LvqnQ-_aojdd6kiY-BPZl50/w640-h342/file_000000009900820eb9e6eb571e418355.png" title="Financial planning and market analysis dashboard for smarter loan, credit and investment decisions" width="640" /></a></div><div style="text-align: center;"><br /></div>
 
-          <p>
-            Our goal is to provide clear financial tools and useful
-            information that help travelers and consumers understand
-            their options and make more informed financial decisions.
-          </p>
+<p style="margin-bottom: 12px; max-width: 620px;">
+Compare loans, estimate payments, monitor market trends, improve your credit strategy and make better financial decisions with professional simulation tools.
+</p>
 
-        </div>
-      </div>
-    </section>
+<span class="data-asof" style="color: #1683FF;">Market data on this page as of August 29, 2026 · exchange rates update live</span>
 
-  </main>
+<div style="display: flex; flex-wrap: wrap; gap: 18px; margin-top: 24px;">
+<a class="btn btn-primary" href="https://www.smarttravelfinance.com/p/california-financial-simulator-loan.html">Start Simulation</a>
+<a class="btn btn-dark" href="#market">Market News</a>
+</div>
 
-  <footer>
-    © 2026 Smart Travel Finance. All rights reserved.
-  </footer>
+<div style="display: grid; gap: 24px; grid-template-columns: repeat(3,1fr); margin-top: 55px;">
 
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function () {
-        navigator.serviceWorker.register('./service-worker.js')
-          .then(function (registration) {
-            console.log(
-              'Service Worker registered:',
-              registration.scope
-            );
-          })
-          .catch(function (error) {
-            console.error(
-              'Service Worker registration failed:',
-              error
-            );
-          });
-      });
-    }
-  </script>
+<div class="card">
+<div style="color: #a3b8d1; font-size: 15px;">Access</div>
+<div style="color: white; font-size: 30px; font-weight: 800; margin-top: 8px;">Free</div>
+</div>
 
-</body>
+<div class="card">
+<div style="color: #a3b8d1; font-size: 15px;">Sign-Up</div>
+<div style="color: white; font-size: 30px; font-weight: 800; margin-top: 8px;">None Required</div>
+</div>
+
+<div class="card">
+<div style="color: #a3b8d1; font-size: 15px;">Tools Available</div>
+<div style="color: white; font-size: 30px; font-weight: 800; margin-top: 8px;">6+</div>
+</div>
+
+</div>
+</div>
+
+<div>
+
+<div class="card float" style="padding: 34px;">
+
+<div style="align-items: center; display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between;">
+<div>
+<div style="color: #9cb1cb; font-size: 15px;">Sample Portfolio (Illustrative)</div>
+<div style="color: white; font-size: 36px; font-weight: 800; margin-top: 8px;">$248,430</div>
+</div>
+<div style="background: rgb(22, 52, 84); border-radius: 18px; color: #8cc8ff; font-size: 16px; font-weight: 700; padding: 12px 18px;">▲ +8.42%</div>
+</div>
+
+<div style="background: linear-gradient(rgb(19, 37, 61), rgb(13, 26, 45)); border-radius: 20px; height: 260px; margin-top: 34px; overflow: hidden; position: relative;">
+<div style="background: linear-gradient(rgba(45, 140, 255, 0), rgba(45, 140, 255, 0.3)); bottom: 0px; height: 160px; left: 0px; position: absolute; right: 0px;"></div>
+<svg style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;" viewbox="0 0 800 300">
+<polyline fill="none" points="0,240 80,220 150,210 220,180 300,190 360,150 430,140 520,120 610,95 700,80 800,35" stroke-width="5" stroke="#5fb2ff">
+</polyline></svg>
+</div>
+
+<div style="display: grid; gap: 16px; grid-template-columns: repeat(3,1fr); margin-top: 28px;">
+
+<div class="glass" style="padding: 18px; text-align: center;">
+<div style="color: #9cb1cb; font-size: 15px;">S&amp;P 500</div>
+<div style="color: #ff5c75; font-size: 24px; font-weight: 800; margin-top: 8px;">-0.25%</div>
+</div>
+
+<div class="glass" style="padding: 18px; text-align: center;">
+<div style="color: #9cb1cb; font-size: 15px;">NASDAQ</div>
+<div style="color: #ff5c75; font-size: 24px; font-weight: 800; margin-top: 8px;">-0.52%</div>
+</div>
+
+<div class="glass" style="padding: 18px; text-align: center;">
+<div style="color: #9cb1cb; font-size: 15px;">DOW</div>
+<div style="color: #ffb648; font-size: 24px; font-weight: 800; margin-top: 8px;">-0.02%</div>
+</div>
+
+</div>
+<span class="data-asof">Closing levels, August 28, 2026</span>
+</div>
+</div>
+
+</section>
+
+<!--=======================================================
+PARTE 3/10
+PREMIUM MARKET DASHBOARD + LIVE FX WIDGET
+=======================================================-->
+
+<section id="market">
+
+<div style="align-items: center; display: flex; flex-wrap: wrap; gap: 15px; justify-content: space-between; margin-bottom: 30px;">
+
+<div>
+<div class="badge" style="color: #1683FF;">MARKET SNAPSHOT</div>
+<h2 style="margin-top: 18px;">Financial Dashboard</h2>
+<p>Track markets, interest rates and access every financial tool from one place.</p>
+<span class="data-asof" style="color: #1683FF;">Index levels and rates updated August 29, 2026 — verify current levels before making decisions</span>
+</div>
+
+<a class="btn btn-primary" href="https://www.smarttravelfinance.com/p/california-financial-simulator-loan.html">Open Financial Simulator</a>
+
+</div>
+
+<div class="grid-4">
+
+<div class="card">
+<div style="align-items: center; display: flex; justify-content: space-between;">
+<div style="color: #9bb2cc; font-size: 15px;">S&amp;P 500</div>
+<div style="color: #ff5c75; font-size: 15px;">▼ Today</div>
+</div>
+<div style="font-size: 36px; font-weight: 800; margin-top: 15px;">7,712</div>
+<div style="color: #ff5c75; font-size: 17px; font-weight: 700; margin-top: 12px;">-0.25%</div>
+</div>
+
+<div class="card">
+<div style="align-items: center; display: flex; justify-content: space-between;">
+<div style="color: #9bb2cc; font-size: 15px;">NASDAQ</div>
+<div style="color: #ff5c75; font-size: 15px;">▼ Tech</div>
+</div>
+<div style="font-size: 36px; font-weight: 800; margin-top: 15px;">26,402</div>
+<div style="color: #ff5c75; font-size: 17px; font-weight: 700; margin-top: 12px;">-0.52%</div>
+</div>
+
+<div class="card">
+<div style="align-items: center; display: flex; justify-content: space-between;">
+<div style="color: #9bb2cc; font-size: 15px;">10Y Treasury</div>
+<div style="color: #ffb648; font-size: 15px;">Yield</div>
+</div>
+<div style="font-size: 36px; font-weight: 800; margin-top: 15px;">4.72%</div>
+<div style="color: #ffb648; font-size: 17px; margin-top: 12px;">Rising, Hawkish Fed Tone</div>
+</div>
+
+<div class="card" id="fxCard">
+<div style="align-items: center; display: flex; justify-content: space-between;">
+<div style="color: #9bb2cc; font-size: 15px;">USD / EUR</div>
+<div style="color: #20d489; font-size: 15px;">● Live</div>
+</div>
+<div style="font-size: 36px; font-weight: 800; margin-top: 15px;" id="fxHeadline">…</div>
+<div style="color: #7cc0ff; font-size: 17px; margin-top: 12px;" id="fxSub">Loading live rate</div>
+</div>
+
+</div>
+
+<div class="glass" style="margin-top: 24px; padding: 24px;">
+<div style="color: #147DFF; font-size: 15px; margin-bottom: 12px;">Live Exchange Rates — USD Base</div>
+<div id="fxRatesFull" style="color: #fff; font-size: 18px; line-height: 1.9;">Loading live rates…</div>
+<span class="data-asof" id="fxUpdated"></span>
+</div>
+
+<script>
+(function(){
+  fetch('https://api.frankfurter.app/latest?from=USD&to=EUR,GBP,JPY,CAD,MXN')
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      var rates = data.rates;
+      document.getElementById('fxHeadline').textContent = rates.EUR.toFixed(4);
+      document.getElementById('fxSub').textContent = '1 USD in EUR';
+      document.getElementById('fxRatesFull').innerHTML =
+        '1 USD = ' + rates.EUR.toFixed(4) + ' EUR &nbsp;·&nbsp; ' +
+        '1 USD = ' + rates.GBP.toFixed(4) + ' GBP &nbsp;·&nbsp; ' +
+        '1 USD = ' + rates.JPY.toFixed(2) + ' JPY &nbsp;·&nbsp; ' +
+        '1 USD = ' + rates.CAD.toFixed(4) + ' CAD &nbsp;·&nbsp; ' +
+        '1 USD = ' + rates.MXN.toFixed(2) + ' MXN';
+      document.getElementById('fxUpdated').textContent = 'Live rate, source: Frankfurter (ECB reference rates), updated ' + data.date;
+    })
+    .catch(function(){
+      document.getElementById('fxHeadline').textContent = '—';
+      document.getElementById('fxSub').textContent = 'Live rate unavailable';
+      document.getElementById('fxRatesFull').textContent = 'Live rates temporarily unavailable — try our Currency Converter tool.';
+    });
+})();
+</script>
+
+</section>
+
+<!--=======================================================
+PARTE 3B/10
+SOURCE TRUST STRIP (replaces fake usage stats)
+=======================================================-->
+
+<section style="margin-top: -30px;">
+<div class="glass" style="padding: 26px 30px; text-align: center;">
+<div style="color: #147DFF; font-size: 14px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px;">Data Sourced From</div>
+<div style="display: flex; flex-wrap: wrap; gap: 14px; justify-content: center;">
+<span style="background: rgba(255,255,255,.06); border-radius: 30px; color: #147DFF; font-size: 15px; font-weight: 600; padding: 10px 20px;">Freddie Mac PMMS</span>
+<span style="background: rgba(255,255,255,.06); border-radius: 30px; color: #147DFF; font-size: 15px; font-weight: 600; padding: 10px 20px;">Federal Reserve (FRED)</span>
+<span style="background: rgba(255,255,255,.06); border-radius: 30px; color: #147DFF; font-size: 15px; font-weight: 600; padding: 10px 20px;">U.S. Bureau of Labor Statistics</span>
+<span style="background: rgba(255,255,255,.06); border-radius: 30px; color: #147DFF; font-size: 15px; font-weight: 600; padding: 10px 20px;">Bankrate</span>
+<span style="background: rgba(255,255,255,.06); border-radius: 30px; color: #147DFF; font-size: 15px; font-weight: 600; padding: 10px 20px;">Frankfurter / ECB</span>
+</div>
+</div>
+</section>
+
+<section>
+
+<h2 style="margin-bottom: 30px;">Premium Financial Tools</h2>
+
+<div class="grid-3">
+
+<a class="card" href="https://www.smarttravelfinance.com/p/california-financial-simulator-loan.html">
+  <div style="font-size: 56px;">💳</div>
+
+  <h3 style="margin-top: 18px; color: #f0c078; font-weight: 800;">
+    Loan Simulator
+  </h3>
+
+  <p style="color: #ffffff; font-weight: 700;">
+    Estimate monthly payments, APR and total financing costs before applying.
+  </p>
+
+  <div style="color: #7cc0ff; font-size: 17px; font-weight: 700; margin-top: 25px;">
+    Open Tool →
+  </div>
+</a>
+
+<a class="card" href="https://www.smarttravelfinance.com/p/auto-loan-payment-calculator-estimate.html">
+  <div style="font-size: 56px;">🚗</div>
+  <h3 style="margin-top: 18px; color: #f0c078; font-weight: 800;">Auto Financing</h3>
+  <p style="color: #ffffff; font-weight: 700;">Compare vehicle financing scenarios and calculate real ownership costs.</p>
+  <div style="color: #7cc0ff; font-size: 17px; font-weight: 700; margin-top: 25px;">Open Tool →</div>
+</a>
+
+<a class="card" href="https://www.smarttravelfinance.com/p/international-bank-comparison-tool.html">
+  <div style="font-size: 56px;">🏦</div>
+  <h3 style="margin-top: 18px; color: #f0c078; font-weight: 800;">Bank Comparison</h3>
+  <p style="color: #ffffff; font-weight: 700;">Analyze lenders, compare rates and discover better borrowing options.</p>
+  <div style="color: #7cc0ff; font-size: 17px; font-weight: 700; margin-top: 25px;">Open Tool →</div>
+</a>
+
+<a class="card" href="https://www.smarttravelfinance.com/2026/07/free-credit-score-estimator-check-your.html">
+  <div style="font-size: 56px;">📈</div>
+  <h3 style="margin-top: 18px; color: #f0c078; font-weight: 800;">Credit Score</h3>
+  <p style="color: #ffffff; font-weight: 700;">Estimate your credit profile and understand how it impacts loan approvals.</p>
+  <div style="color: #7cc0ff; font-size: 17px; font-weight: 700; margin-top: 25px;">Open Tool →</div>
+</a>
+
+<a class="card" href="https://www.smarttravelfinance.com/2026/07/currency-converter-online-compare-usd.html">
+  <div style="font-size: 56px;">💵</div>
+  <h3 style="margin-top: 18px; color: #f0c078; font-weight: 800;">Currency Converter</h3>
+  <p style="color: #ffffff; font-weight: 700;">Monitor exchange rates and compare international currency values instantly.</p>
+  <div style="color: #7cc0ff; font-size: 17px; font-weight: 700; margin-top: 25px;">Open Tool →</div>
+</a>
+
+<a class="card" href="https://www.smarttravelfinance.com/p/cheap-flights-finder-find-lowest.html">
+  <div style="font-size: 56px;">✈️</div>
+  <h3 style="margin-top: 18px; color: #f0c078; font-weight: 800;">Travel Deals</h3>
+  <p style="color: #ffffff; font-weight: 700;">Search flights and compare travel prices while planning smarter budgets.</p>
+  <div style="color: #7cc0ff; font-size: 17px; font-weight: 700; margin-top: 25px;">Open Tool →</div>
+</a>
+
+</div>
+</section>
+
+<section>
+<div class="card">
+<div class="grid-2" style="align-items: center;">
+
+<div>
+<div class="badge">FINANCIAL INSIGHTS</div>
+
+<h2 style="margin-top: 20px; color: #f0c078; font-weight: 800;">
+  Everything You Need Before Making a Financial Decision
+</h2>
+
+<p style="margin-top: 18px; color: #ffffff; font-weight: 700;">
+  Calculate payments, compare financing, estimate your credit strength and understand current market conditions before signing any contract.
+</p>
+
+<div style="display: flex; flex-wrap: wrap; gap: 18px; margin-top: 35px;">
+<a class="btn btn-primary" href="https://www.smarttravelfinance.com/p/california-financial-simulator-loan.html">Start Now</a>
+<a class="btn btn-dark" href="https://www.smarttravelfinance.com/">Latest News</a>
+</div>
+</div>
+
+<div>
+<div class="glass" style="padding: 28px;">
+
+<div style="border-bottom: 1px solid rgba(255, 255, 255, 0.08); display: flex; font-size: 18px; justify-content: space-between; padding: 18px 0px;">
+<span>Average New Auto Loan</span>
+<strong style="color: #ffb648;">6.94%</strong>
+</div>
+
+<div style="border-bottom: 1px solid rgba(255, 255, 255, 0.08); display: flex; font-size: 18px; justify-content: space-between; padding: 18px 0px;">
+<span>30-Year Mortgage</span>
+<strong style="color: #ffb648;">6.66%</strong>
+</div>
+
+<div style="border-bottom: 1px solid rgba(255, 255, 255, 0.08); display: flex; font-size: 18px; justify-content: space-between; padding: 18px 0px;">
+<span>Credit Analysis</span>
+<strong style="color: #20d489;">Available</strong>
+</div>
+
+<div style="display: flex; font-size: 18px; justify-content: space-between; padding: 18px 0px;">
+<span>Financial Simulators</span>
+<strong style="color: #20d489;">Free Access</strong>
+</div>
+
+</div>
+<span class="data-asof">Rates as of August 27, 2026 (Freddie Mac, Bankrate)</span>
+</div>
+
+</div>
+</div>
+</section>
+
+<!--=======================================================
+PARTE 4/10
+NEWS CENTER + MARKET INSIGHTS
+=======================================================-->
+
+<section style="margin-top: 80px;">
+
+<div style="align-items: end; display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between; margin-bottom: 35px;">
+<div>
+<div class="badge" style="color: #6CB6FF;">LATEST MARKET INSIGHTS</div>
+<h2 style="margin-top: 18px;">Financial News &amp; Analysis</h2>
+<p>Stay informed with market movements, interest rates and personal finance updates.</p>
+</div>
+<a class="btn btn-dark" href="https://www.smarttravelfinance.com/" style="color: #fff !important;">View All Articles</a>
+</div>
+
+<div class="grid-3">
+
+<div class="card">
+<div style="align-items: center; background: linear-gradient(135deg, rgb(45, 140, 255), rgb(103, 184, 255)); border-radius: 20px; display: flex; font-size: 70px; height: 220px; justify-content: center;">📈</div>
+<div style="margin-top: 25px;">
+  <div style="color: #7cc0ff; font-size: 15px; font-weight: 700; text-transform: uppercase;">
+    Markets
+  </div>
+
+  <h3 style="line-height: 1.4; margin-top: 15px; color: #7cc0ff; font-weight: 800;">
+    Wall Street Reaches New Highs
+  </h3>
+
+  <p style="margin-top: 14px; color: #ffffff; font-weight: 700;">
+    Understand what rising markets mean for investors, borrowers and California households.
+  </p>
+</div>
+<a href="https://www.smarttravelfinance.com/" style="color: #7cc0ff; display: inline-block; font-size: 17px; font-weight: 700; margin-top: 25px;">Read Article →</a>
+</div>
+</div>
+
+<div class="card">
+<div style="align-items: center; background: linear-gradient(135deg, rgb(24, 199, 122), rgb(54, 230, 162)); border-radius: 20px; display: flex; font-size: 70px; height: 220px; justify-content: center;">🏦</div>
+<div style="margin-top: 25px;">
+  <div style="color: #7cc0ff; font-size: 15px; font-weight: 700; text-transform: uppercase;">
+    Banking
+  </div>
+
+  <h3 style="line-height: 1.4; margin-top: 15px; color: #7cc0ff; font-weight: 800;">
+    How Interest Rates Affect Loans
+  </h3>
+
+  <p style="margin-top: 14px; color: #ffffff; font-weight: 700;">
+    Learn how APR changes influence mortgages, auto loans and personal financing.
+  </p>
+</div>
+<a href="https://www.smarttravelfinance.com/" style="color: #7cc0ff; display: inline-block; font-size: 17px; font-weight: 700; margin-top: 25px;">Read Article →</a>
+</div>
+
+
+<div class="card">
+<div style="align-items: center; background: linear-gradient(135deg, rgb(255, 140, 59), rgb(255, 194, 77)); border-radius: 20px; display: flex; font-size: 70px; height: 220px; justify-content: center;">💳</div>
+<div style="margin-top: 25px;">
+  <div style="color: #7cc0ff; font-size: 15px; font-weight: 700; text-transform: uppercase;">
+    Credit
+  </div>
+
+  <h3 style="line-height: 1.4; margin-top: 15px; color: #7cc0ff; font-weight: 800;">
+    Improve Your Credit Score Faster
+  </h3>
+
+  <p style="margin-top: 14px; color: #ffffff; font-weight: 700;">
+    Discover practical ways to increase your approval chances before applying for credit.
+  </p>
+</div>
+<a href="https://www.smarttravelfinance.com/2026/07/free-credit-score-estimator-check-your.html" style="color: #7cc0ff; display: inline-block; font-size: 17px; font-weight: 700; margin-top: 25px;">Read Article →</a>
+</div>
+
+</section>
+
+<section style="margin-top: 80px;">
+<div class="card">
+
+<div style="align-items: center; display: flex; flex-wrap: wrap; gap: 25px; justify-content: space-between; margin-bottom: 30px;">
+<div>
+<div class="badge">MARKET SNAPSHOT</div>
+<h2 style="margin-top: 15px; color: #5DADE2;">Today's Financial Highlights</h2>
+<span class="data-asof">August 29, 2026</span>
+</div>
+</div>
+
+<div class="grid-4">
+
+<div class="glass" style="padding: 24px;">
+<div style="color: #a3b8d1; font-size: 15px;">Mortgage Rates</div>
+<div style="font-size: 32px; font-weight: 800; margin-top: 10px;">6.66%</div>
+<div style="color: #ffb648; font-size: 16px; margin-top: 10px;">Near 12-Month High</div>
+</div>
+
+<div class="glass" style="padding: 24px;">
+<div style="color: #a3b8d1; font-size: 15px;">Auto Loan APR</div>
+<div style="font-size: 32px; font-weight: 800; margin-top: 10px;">6.94%</div>
+<div style="color: #7cc0ff; font-size: 16px; margin-top: 10px;">60-Month New Car</div>
+</div>
+
+<div class="glass" style="padding: 24px;">
+<div style="color: #a3b8d1; font-size: 15px;">Inflation (CPI)</div>
+<div style="font-size: 32px; font-weight: 800; margin-top: 10px;">3.4%</div>
+<div style="color: #ffb648; font-size: 16px; margin-top: 10px;">Easing, Still Elevated</div>
+</div>
+
+<div class="glass" style="padding: 24px;">
+<div style="color: #a3b8d1; font-size: 15px;">Fed Outlook</div>
+<div style="font-size: 32px; font-weight: 800; margin-top: 10px;">Hawkish Tilt</div>
+<div style="color: #ffb648; font-size: 16px; margin-top: 10px;">~50% Chance Sept. Hike</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<section style="margin-top: 80px;">
+<div class="card">
+<div class="grid-2" style="align-items: center;">
+
+<div>
+<div class="badge">SMART FINANCE</div>
+<h2 style="margin-top: 20px; color: #5DADE2;">Professional Financial Intelligence</h2>
+
+<p style="margin-top: 20px; color: #FFFFFF;">
+Instead of making decisions based on headlines alone, compare financing scenarios, estimate payments and evaluate market conditions using reliable financial tools.
+</p>
+
+<ul style="color: #c2d0e2; font-size: 18px; line-height: 2; margin-top: 30px; padding-left: 22px;">
+<li>✔ Loan comparison tools</li>
+<li>✔ Credit score estimators</li>
+<li>✔ Financial calculators</li>
+<li>✔ Market analysis</li>
+<li>✔ Investment insights</li>
+</ul>
+</div>
+
+<div>
+<div style="background: linear-gradient(135deg, rgb(19, 34, 56), rgb(31, 54, 89)); border-radius: 24px; padding: 40px; text-align: center;">
+<div style="font-size: 90px;">📊</div>
+<h3 style="margin-top: 25px; color: #5DADE2;">Data-Driven Decisions</h3>
+
+<p style="margin-top: 20px; color: #FFFFFF;">
+Powerful financial tools designed to help you analyze costs before making important money decisions.
+</p>
+<a class="btn btn-primary" href="https://www.smarttravelfinance.com/p/california-financial-simulator-loan.html" style="margin-top: 30px;">Start Comparing</a>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<!--==========================
+PARTE 5
+FEATURED FINANCIAL TOOLS
+===========================-->
+
+<section style="background: rgb(255, 255, 255); padding: 90px 25px;">
+<div style="margin: auto; max-width: 1250px;">
+
+<div style="margin-bottom: 70px; text-align: center;">
+<span style="background: rgb(238, 244, 255); border-radius: 30px; color: #1a73e8; display: inline-block; font-size: 15px; font-weight: 700; letter-spacing: 1px; padding: 9px 22px;">SMART TOOLS</span>
+<h2 style="color: #08172d; font-size: 48px; font-weight: 800; margin-top: 22px;">Everything You Need To Make Better Financial Decisions</h2>
+<p style="color: #5b6678; font-size: 20px; line-height: 1.9; margin: 20px auto 0px; max-width: 760px;">Professional calculators, comparison tools and financial resources built to help you save money before making important decisions.</p>
+</div>
+
+<div style="display: grid; gap: 30px; grid-template-columns: repeat(auto-fit,minmax(320px,1fr));">
+
+<a href="https://www.smarttravelfinance.com/p/california-financial-simulator-loan.html" style="background: rgb(255, 255, 255); border-radius: 28px; box-shadow: rgba(20, 40, 80, 0.08) 0px 20px 60px; display: block; overflow: hidden; text-decoration: none; transition: 0.3s;">
+<div style="background: linear-gradient(90deg, rgb(26, 115, 232), rgb(66, 133, 244)); height: 7px;"></div>
+<div style="padding: 38px;">
+<div style="align-items: center; background: rgb(238, 245, 255); border-radius: 22px; display: flex; font-size: 42px; height: 82px; justify-content: center; margin-bottom: 28px; width: 82px;">💳</div>
+<h3 style="color: #08172d; font-size: 29px; margin-bottom: 16px;">Loan Simulator</h3>
+<p style="color: #667085; font-size: 18px; line-height: 1.9; margin-bottom: 28px;">Estimate monthly payments, compare financing options and calculate total borrowing costs instantly.</p>
+<div style="align-items: center; display: flex; justify-content: space-between;">
+<span style="color: #1a73e8; font-size: 17px; font-weight: 700;">Open Tool →</span>
+<span style="background: rgb(238, 245, 255); border-radius: 20px; color: #1a73e8; font-size: 14px; font-weight: 700; padding: 8px 14px;">Popular</span>
+</div>
+</div>
+</a>
+
+<a href="https://www.smarttravelfinance.com/p/international-bank-comparison-tool.html" style="background: rgb(255, 255, 255); border-radius: 28px; box-shadow: rgba(20, 40, 80, 0.08) 0px 20px 60px; display: block; overflow: hidden; text-decoration: none;">
+<div style="background: linear-gradient(90deg, rgb(0, 184, 148), rgb(0, 208, 132)); height: 7px;"></div>
+<div style="padding: 38px;">
+<div style="align-items: center; background: rgb(235, 255, 246); border-radius: 22px; display: flex; font-size: 42px; height: 82px; justify-content: center; margin-bottom: 28px; width: 82px;">🏦</div>
+<h3 style="color: #08172d; font-size: 29px; margin-bottom: 16px;">Bank Comparison</h3>
+<p style="color: #667085; font-size: 18px; line-height: 1.9; margin-bottom: 28px;">Compare banks, loan offers and financial institutions to find better rates and lower fees.</p>
+<div style="align-items: center; display: flex; justify-content: space-between;">
+<span style="color: #00a86b; font-size: 17px; font-weight: 700;">Compare →</span>
+<span style="background: rgb(236, 255, 247); border-radius: 20px; color: #00a86b; font-size: 14px; font-weight: 700; padding: 8px 14px;">Updated</span>
+</div>
+</div>
+</a>
+
+<a href="https://www.smarttravelfinance.com/2026/07/currency-converter-online-compare-usd.html" style="background: rgb(255, 255, 255); border-radius: 28px; box-shadow: rgba(20, 40, 80, 0.08) 0px 20px 60px; display: block; overflow: hidden; text-decoration: none;">
+<div style="background: linear-gradient(90deg, rgb(255, 152, 0), rgb(255, 179, 0)); height: 7px;"></div>
+<div style="padding: 38px;">
+<div style="align-items: center; background: rgb(255, 248, 232); border-radius: 22px; display: flex; font-size: 42px; height: 82px; justify-content: center; margin-bottom: 28px; width: 82px;">💵</div>
+<h3 style="color: #08172d; font-size: 29px; margin-bottom: 16px;">Currency Rates</h3>
+<p style="color: #667085; font-size: 18px; line-height: 1.9; margin-bottom: 28px;">Track exchange rates, compare currencies and monitor international market movements.</p>
+<div style="align-items: center; display: flex; justify-content: space-between;">
+<span style="color: #ff9800; font-size: 17px; font-weight: 700;">View Rates →</span>
+<span style="background: rgb(255, 247, 232); border-radius: 20px; color: #ff9800; font-size: 14px; font-weight: 700; padding: 8px 14px;">Live</span>
+</div>
+</div>
+</a>
+
+</div>
+</div>
+</section>
+
+<!--=========================================
+PARTE 6
+LIVE MARKET + FINANCIAL NEWS
+==========================================-->
+
+<section style="background: rgb(245, 248, 253); padding: 90px 25px;">
+<div style="margin: auto; max-width: 1250px;">
+
+<div style="margin-bottom: 65px; text-align: center;">
+<span style="background: rgb(234, 242, 255); border-radius: 30px; color: #1a73e8; display: inline-block; font-size: 15px; font-weight: 700; letter-spacing: 1px; padding: 9px 22px;">MARKET SNAPSHOT</span>
+<h2 style="color: #08172d; font-size: 48px; font-weight: 800; margin-top: 22px;">Financial News &amp; Market Insights</h2>
+<p style="color: #667085; font-size: 20px; line-height: 1.8; margin: 18px auto 0px; max-width: 760px;">Stay informed with daily financial updates, interest rate movements and investment trends that impact your money.</p>
+</div>
+
+<div style="display: grid; gap: 35px; grid-template-columns: 2fr 1fr;">
+
+<div style="background: rgb(255, 255, 255); border-radius: 28px; box-shadow: rgba(15, 30, 60, 0.08) 0px 20px 60px; overflow: hidden;">
+<img alt="Financial Market News" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhUqOpiVskyintLN1SZ_Q_yJL8nsEkdi37YJ0xrnrThtUNCV4gtRUH2w-Q4A0mpyRxndUfflYnI9PpFsu6oZUaAuhsx4S5bXEnAtagBdHV3CPx6Yw7TgYXtGZfiC_LAncMXce0LTI7uD7oObQaHueCPg-ZGE74Eg2vKQ4QL1LvqnQ-_aojdd6kiY-BPZl50/w640-h342/file_000000009900820eb9e6eb571e418355.png" style="display: block; width: 100%;" />
+<div style="padding: 35px;">
+<span style="background: rgb(238, 245, 255); border-radius: 20px; color: #1a73e8; font-size: 15px; font-weight: 700; padding: 8px 18px;">MARKET UPDATE</span>
+<h3 style="color: #08172d; font-size: 34px; margin: 22px 0px 18px;">Wall Street, Interest Rates and Your Financial Decisions</h3>
+<p style="color: #667085; font-size: 18px; line-height: 1.9; margin-bottom: 28px;">Understand how inflation, Treasury yields, stock markets and Federal Reserve decisions influence mortgages, loans and investments.</p>
+<a href="https://www.smarttravelfinance.com/" style="background: rgb(26, 115, 232); border-radius: 12px; color: white; display: inline-block; font-size: 17px; font-weight: 700; padding: 15px 28px; text-decoration: none;">Read Full Analysis →</a>
+</div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 25px;">
+
+<div style="background: rgb(255, 255, 255); border-radius: 22px; box-shadow: rgba(15, 30, 60, 0.08) 0px 15px 45px; padding: 28px;">
+<div style="font-size: 38px;">📈</div>
+<h3 style="color: #08172d; font-size: 22px; margin: 18px 0px;">Stock Market</h3>
+<p style="color: #667085; font-size: 17px; line-height: 1.8;">Daily updates covering the S&amp;P 500, Nasdaq and Dow Jones.</p>
+</div>
+
+<div style="background: rgb(255, 255, 255); border-radius: 22px; box-shadow: rgba(15, 30, 60, 0.08) 0px 15px 45px; padding: 28px;">
+<div style="font-size: 38px;">🏦</div>
+<h3 style="color: #08172d; font-size: 22px; margin: 18px 0px;">Interest Rates</h3>
+<p style="color: #667085; font-size: 17px; line-height: 1.8;">Follow mortgage rates, auto loans, Treasury yields and Federal Reserve announcements.</p>
+</div>
+
+<div style="background: rgb(255, 255, 255); border-radius: 22px; box-shadow: rgba(15, 30, 60, 0.08) 0px 15px 45px; padding: 28px;">
+<div style="font-size: 38px;">💼</div>
+<h3 style="color: #08172d; font-size: 22px; margin: 18px 0px;">Investments</h3>
+<p style="color: #667085; font-size: 17px; line-height: 1.8;">Learn how market events affect long-term investing and portfolio growth.</p>
+</div>
+
+</div>
+</div>
+</div>
+</section>
+
+<!--=========================================
+PARTE 7
+WHY CHOOSE SMART FINANCE
+==========================================-->
+
+<section style="background: rgb(8, 21, 38); overflow: hidden; padding: 100px 25px; position: relative;">
+
+<div style="background: radial-gradient(circle, rgba(26, 115, 232, 0.25), transparent 70%); border-radius: 50%; height: 500px; position: absolute; right: -150px; top: -250px; width: 500px;"></div>
+<div style="background: radial-gradient(circle, rgba(0, 200, 150, 0.15), transparent 70%); border-radius: 50%; bottom: -200px; height: 450px; left: -150px; position: absolute; width: 450px;"></div>
+
+<div style="margin: auto; max-width: 1250px; position: relative; z-index: 2;">
+
+<div style="margin-bottom: 70px; text-align: center;">
+<span style="background: rgba(255, 255, 255, 0.08); border-radius: 30px; color: #7cc0ff; display: inline-block; font-size: 15px; font-weight: 700; letter-spacing: 1px; padding: 9px 22px;">WHY CHOOSE US</span>
+<h2 style="color: white; font-size: 50px; font-weight: 800; margin: 22px 0px;">Professional Financial Platform</h2>
+<p style="color: #c2d0e2; font-size: 20px; line-height: 1.9; margin: auto; max-width: 760px;">Everything is designed to help you analyze financial scenarios with confidence before making important decisions.</p>
+</div>
+
+<div style="display: grid; gap: 28px; grid-template-columns: repeat(auto-fit,minmax(260px,1fr));">
+
+<div style="backdrop-filter: blur(14px); background: rgba(255, 255, 255, 0.05); border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.08); padding: 35px;">
+<div style="align-items: center; background: rgba(26, 115, 232, 0.18); border-radius: 18px; display: flex; font-size: 38px; height: 74px; justify-content: center; margin-bottom: 25px; width: 74px;">⚡</div>
+<h3 style="color: white; font-size: 27px; margin-bottom: 18px;">Fast Analysis</h3>
+<p style="color: #c2d0e2; font-size: 18px; line-height: 1.9;">Run simulations instantly and compare multiple financial scenarios in seconds.</p>
+</div>
+
+<div style="backdrop-filter: blur(14px); background: rgba(255, 255, 255, 0.05); border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.08); padding: 35px;">
+<div style="align-items: center; background: rgba(0, 200, 150, 0.18); border-radius: 18px; display: flex; font-size: 38px; height: 74px; justify-content: center; margin-bottom: 25px; width: 74px;">🛡️</div>
+<h3 style="color: white; font-size: 27px; margin-bottom: 18px;">Reliable Information</h3>
+<p style="color: #c2d0e2; font-size: 18px; line-height: 1.9;">Financial content focused on practical decisions supported by trusted market data.</p>
+</div>
+
+<div style="backdrop-filter: blur(14px); background: rgba(255, 255, 255, 0.05); border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.08); padding: 35px;">
+<div style="align-items: center; background: rgba(255, 180, 0, 0.18); border-radius: 18px; display: flex; font-size: 38px; height: 74px; justify-content: center; margin-bottom: 25px; width: 74px;">📊</div>
+<h3 style="color: white; font-size: 27px; margin-bottom: 18px;">Professional Tools</h3>
+<p style="color: #c2d0e2; font-size: 18px; line-height: 1.9;">Loan calculators, investment comparisons, banking tools and financial planning resources.</p>
+</div>
+
+<div style="backdrop-filter: blur(14px); background: rgba(255, 255, 255, 0.05); border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.08); padding: 35px;">
+<div style="align-items: center; background: rgba(255, 255, 255, 0.12); border-radius: 18px; display: flex; font-size: 38px; height: 74px; justify-content: center; margin-bottom: 25px; width: 74px;">🌎</div>
+<h3 style="color: white; font-size: 27px; margin-bottom: 18px;">California-First Coverage</h3>
+<p style="color: #c2d0e2; font-size: 18px; line-height: 1.9;">Covering banking, investing, personal finance and travel with a California and U.S. focus.</p>
+</div>
+
+</div>
+</div>
+</section>
+
+<!--=========================================
+PARTE 8
+TRUST + CALL TO ACTION
+==========================================-->
+
+<section style="background: linear-gradient(rgb(255, 255, 255), rgb(245, 248, 253)); padding: 100px 25px;">
+<div style="margin: auto; max-width: 1250px;">
+
+<div style="margin-bottom: 70px; text-align: center;">
+<span style="background: rgb(238, 245, 255); border-radius: 30px; color: #1a73e8; display: inline-block; font-size: 15px; font-weight: 700; letter-spacing: 1px; padding: 9px 22px;">SMART FINANCE</span>
+<h2 style="color: #08172d; font-size: 48px; font-weight: 800; margin: 22px 0px;">Built To Simplify Financial Decisions</h2>
+<p style="color: #667085; font-size: 20px; line-height: 1.9; margin: auto; max-width: 760px;">Our mission is to simplify financial decisions through professional tools, reliable educational content and practical comparisons.</p>
+</div>
+
+<div style="display: grid; gap: 25px; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); margin-bottom: 70px;">
+
+<div style="background: rgb(255, 255, 255); border-radius: 22px; box-shadow: rgba(10, 25, 60, 0.08) 0px 20px 60px; padding: 35px; text-align: center;">
+<div style="color: #1a73e8; font-size: 40px; font-weight: 800;">Free</div>
+<p style="color: #667085; font-size: 18px; margin-top: 12px;">All Tools, No Cost</p>
+</div>
+
+<div style="background: rgb(255, 255, 255); border-radius: 22px; box-shadow: rgba(10, 25, 60, 0.08) 0px 20px 60px; padding: 35px; text-align: center;">
+<div style="color: #00a86b; font-size: 40px; font-weight: 800;">No Sign-Up</div>
+<p style="color: #667085; font-size: 18px; margin-top: 12px;">Use Tools Instantly</p>
+</div>
+
+<div style="background: rgb(255, 255, 255); border-radius: 22px; box-shadow: rgba(10, 25, 60, 0.08) 0px 20px 60px; padding: 35px; text-align: center;">
+<div style="color: #ff9800; font-size: 40px; font-weight: 800;">Sourced</div>
+<p style="color: #667085; font-size: 18px; margin-top: 12px;">Fed, Freddie Mac, BLS</p>
+</div>
+
+<div style="background: rgb(255, 255, 255); border-radius: 22px; box-shadow: rgba(10, 25, 60, 0.08) 0px 20px 60px; padding: 35px; text-align: center;">
+<div style="color: #7b61ff; font-size: 40px; font-weight: 800;">24/7</div>
+<p style="color: #667085; font-size: 18px; margin-top: 12px;">Free Online Access</p>
+</div>
+
+</div>
+
+<div style="background: linear-gradient(135deg, rgb(11, 87, 208), rgb(26, 115, 232)); border-radius: 32px; box-shadow: rgba(26, 115, 232, 0.35) 0px 30px 80px; color: white; padding: 70px 50px; text-align: center;">
+<h2 style="font-size: 44px; font-weight: 800; margin-bottom: 20px;">Take Control of Your Financial Future</h2>
+<p style="color: #e4edfc; font-size: 21px; line-height: 1.9; margin: 0px auto 40px; max-width: 760px;">Compare loans, estimate monthly payments, analyze investments and discover smarter ways to manage your money.</p>
+
+<div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+<a href="https://www.smarttravelfinance.com/p/california-financial-simulator-loan.html" style="background: rgb(255, 255, 255); border-radius: 14px; color: #1a73e8; font-size: 18px; font-weight: 700; padding: 18px 34px; text-decoration: none;">Start Free Simulation</a>
+<a href="https://www.smarttravelfinance.com/p/international-bank-comparison-tool.html" style="border-radius: 14px; border: 2px solid rgba(255, 255, 255, 0.35); color: white; font-size: 18px; font-weight: 700; padding: 18px 34px; text-decoration: none;">Compare Banks</a>
+</div>
+
+</div>
+</div>
+</section>
+
+<!--=========================================
+PARTE 9
+PREMIUM FOOTER
+==========================================-->
+
+<footer style="background: rgb(8, 21, 38); color: white; padding: 90px 25px 35px;">
+<div style="margin: auto; max-width: 1250px;">
+
+<div style="background: linear-gradient(135deg, rgb(15, 35, 66), rgb(18, 56, 101)); border-radius: 30px; border: 1px solid rgba(255, 255, 255, 0.08); margin-bottom: 70px; padding: 60px 45px;">
+<div style="align-items: center; display: flex; flex-wrap: wrap; gap: 35px; justify-content: space-between;">
+
+<div style="max-width: 650px;">
+<h2 style="font-size: 44px; font-weight: 800; margin-bottom: 18px; color: #5DADE2;">Stay Ahead of the Financial Markets</h2>
+<p style="color: #d3ddf0; font-size: 19px; line-height: 1.9;">Receive updates on interest rates, investing, credit, mortgages, banking and personal finance.</p>
+</div>
+
+<a href="https://www.smarttravelfinance.com/" style="background: rgb(26, 115, 232); border-radius: 14px; color: white; display: inline-block; font-size: 18px; font-weight: 700; padding: 18px 34px; text-decoration: none;">Explore Articles →</a>
+
+</div>
+</div>
+
+<div style="display: grid; gap: 45px; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); margin-bottom: 60px;">
+
+<div>
+<h3 style="font-size: 22px; margin-bottom: 24px; color: #5DADE2;">Smart Finance</h3>
+<p style="color: #bcc9db; font-size: 17px; line-height: 1.9;">Helping readers make smarter financial decisions through premium tools and educational content.</p>
+</div>
+
+<div>
+<h3 style="font-size: 22px; margin-bottom: 24px; color: #5DADE2;">Financial Tools</h3>
+<div style="display: flex; flex-direction: column; gap: 14px;">
+<a href="https://www.smarttravelfinance.com/p/california-financial-simulator-loan.html" style="color: #d3ddf0; font-size: 17px; text-decoration: none;">Loan Simulator</a>
+<a href="https://www.smarttravelfinance.com/p/international-bank-comparison-tool.html" style="color: #d3ddf0; font-size: 17px; text-decoration: none;">Bank Comparison</a>
+<a href="https://www.smarttravelfinance.com/2026/07/currency-converter-online-compare-usd.html" style="color: #d3ddf0; font-size: 17px; text-decoration: none;">Currency Converter</a>
+<a href="https://www.smarttravelfinance.com/" style="color: #d3ddf0; font-size: 17px; text-decoration: none;">Financial Articles</a>
+</div>
+</div>
+
+<div>
+<h3 style="font-size: 22px; margin-bottom: 24px; color: #5DADE2;">Company</h3>
+<div style="display: flex; flex-direction: column; gap: 14px;">
+<a href="/p/about-us.html" style="color: #d3ddf0; font-size: 17px; text-decoration: none;">About Us</a>
+<a href="/p/contact.html" style="color: #d3ddf0; font-size: 17px; text-decoration: none;">Contact</a>
+<a href="/p/privacy-policy.html" style="color: #d3ddf0; font-size: 17px; text-decoration: none;">Privacy Policy</a>
+<a href="/p/terms-of-use.html" style="color: #d3ddf0; font-size: 17px; text-decoration: none;">Terms of Use</a>
+</div>
+</div>
+
+<div>
+<h3 style="font-size: 22px; margin-bottom: 24px; color: #5DADE2;">Follow Us</h3>
+<div style="display: flex; font-size: 32px; gap: 16px;">
+<span>📘</span><span>𝕏</span><span>▶️</span><span>📷</span>
+</div>
+<p style="color: #bcc9db; font-size: 17px; line-height: 1.8; margin-top: 25px;">Daily financial insights, market updates and educational resources.</p>
+</div>
+
+</div>
+
+<div style="background: rgba(255, 255, 255, 0.08); height: 1px; margin: 45px 0px;"></div>
+
+<div style="align-items: center; display: flex; flex-wrap: wrap; gap: 25px; justify-content: space-between;">
+<div style="color: #a3b4cc; font-size: 16px; line-height: 1.9; max-width: 820px;">
+This website provides educational information only and should not be considered financial, legal or investment advice. Exchange rates are live via Frankfurter (ECB reference rates). Other market data is a periodic snapshot and may not reflect current conditions. Always consult qualified professionals before making financial decisions.
+</div>
+<div style="color: #a3b4cc; font-size: 16px;">© 2026 Smart Travel Finance. All Rights Reserved.</div>
+</div>
+
+</div>
+</footer>
+
+<!--=========================================
+PARTE 10
+FINAL PREMIUM ELEMENTS + TRUST BAR
+==========================================-->
+
+<style>
+
+@keyframes floatUp{0%{transform:translateY(0);}50%{transform:translateY(-8px);}100%{transform:translateY(0);}}
+@keyframes pulseGlow{0%{box-shadow:0 0 0 0 rgba(26,115,232,.4);}70%{box-shadow:0 0 0 15px rgba(26,115,232,0);}100%{box-shadow:0 0 0 0 rgba(26,115,232,0);}}
+
+#backTop{
+position:fixed;right:25px;bottom:25px;width:58px;height:58px;border-radius:50%;
+background:#1a73e8;color:white;display:flex;align-items:center;justify-content:center;
+font-size:24px;font-weight:bold;cursor:pointer;z-index:9999;
+box-shadow:0 15px 35px rgba(26,115,232,.35);animation:pulseGlow 2s infinite;
+}
+
+.finance-trust{background:#ffffff;padding:35px 25px;border-top:1px solid #eee;border-bottom:1px solid #eee;}
+.trust-container{max-width:1250px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:25px;}
+.trust-item{display:flex;align-items:center;gap:15px;padding:20px;border-radius:18px;background:#f8faff;}
+.trust-icon{width:60px;height:60px;border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:30px;background:#eaf2ff;}
+.trust-title{font-weight:800;color:#08172d;font-size:18px;}
+.trust-text{font-size:15px;color:#667085;margin-top:5px;}
+
+@media(max-width:700px){
+h1{font-size:32px!important;}
+h2{font-size:30px!important;}
+}
+
+</style>
+
+<section class="finance-trust">
+<div class="trust-container">
+
+<div class="trust-item">
+<div class="trust-icon">🔒</div>
+<div>
+<div class="trust-title">Secure Browsing</div>
+<div class="trust-text">Standard HTTPS protection</div>
+</div>
+</div>
+
+<div class="trust-item">
+<div class="trust-icon">⚡</div>
+<div>
+<div class="trust-title">Instant Calculations</div>
+<div class="trust-text">Fast financial simulations</div>
+</div>
+</div>
+
+<div class="trust-item">
+<div class="trust-icon">💱</div>
+<div>
+<div class="trust-title">Live Currency Data</div>
+<div class="trust-text">Updated daily via ECB rates</div>
+</div>
+</div>
+
+<div class="trust-item">
+<div class="trust-icon">🌎</div>
+<div>
+<div class="trust-title">California-First</div>
+<div class="trust-text">Built for U.S. readers</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<section style="background: rgb(8, 21, 38); color: white; padding: 70px 25px; text-align: center;">
+<div style="margin: auto; max-width: 850px;">
+
+<h2 style="font-size: 40px; font-weight: 800; margin-bottom: 20px; color: #5DADE2;">Smart Decisions Start With Better Information</h2>
+
+<p style="color: #d3ddf0; font-size: 20px; line-height: 1.9;">
+Whether you are comparing a car loan, planning a purchase, analyzing investments or improving your financial strategy, our tools help you understand the numbers before you decide.
+</p>
+
+<a href="https://www.smarttravelfinance.com/p/california-financial-simulator-loan.html" style="animation: 3s ease 0s infinite normal none running floatUp; background: rgb(255, 255, 255); border-radius: 14px; color: #1a73e8; display: inline-block; font-size: 18px; font-weight: 800; margin-top: 35px; padding: 18px 38px; text-decoration: none;">
+Start Your Financial Analysis →
+</a>
+
+</div>
+</section>
+
+<div id="backTop">↑</div>
+
+<script>
+document.getElementById("backTop").onclick=function(){
+window.scrollTo({top:0,behavior:"smooth"});
+};
+</script>
+  </body>
   </html>
